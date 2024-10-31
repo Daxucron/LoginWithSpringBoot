@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import yellow.penguin.demo.dto.request.CreateUserRequest;
+import yellow.penguin.demo.dto.request.LoginRequest;
 import yellow.penguin.demo.dto.response.UserResponse;
 import yellow.penguin.demo.service.UserService;
 
@@ -27,6 +28,16 @@ public class AuthController {
             return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    //TODO: que devuelva el token
+    @PostMapping("/login")
+    public String loginUser(@RequestBody LoginRequest request) {
+        if(userService.loginUser(request)) {            
+            return "Usuario logeado";
+        }else {
+            return "NOPE";
         }
     }
     
