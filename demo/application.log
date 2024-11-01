@@ -2709,3 +2709,40 @@ This generated password is for development use only. Your security configuration
 2024-10-31T19:18:11.021+01:00  INFO 2876 --- [demo] [http-nio-8080-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-10-31T19:18:11.021+01:00  INFO 2876 --- [demo] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2024-10-31T19:18:11.025+01:00  INFO 2876 --- [demo] [http-nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-10-31T19:19:25.929+01:00  INFO 2876 --- [demo] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-10-31T19:19:25.974+01:00  INFO 2876 --- [demo] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-31T19:19:25.980+01:00  INFO 2876 --- [demo] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-31T19:19:25.997+01:00  INFO 2876 --- [demo] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-10-31T19:19:26.089+01:00  INFO 2876 --- [demo] [restartedMain] yellow.penguin.demo.DemoApplication      : Starting DemoApplication using Java 21.0.5 with PID 2876 (C:\Users\Carlos\eclipse-workspace\Noviembre_2024\REPO\LoginWithSpringBoot\demo\target\classes started by Carlos in C:\Users\Carlos\eclipse-workspace\Noviembre_2024\REPO\LoginWithSpringBoot\demo)
+2024-10-31T19:19:26.089+01:00  INFO 2876 --- [demo] [restartedMain] yellow.penguin.demo.DemoApplication      : No active profile set, falling back to 1 default profile: "default"
+2024-10-31T19:19:26.288+01:00  INFO 2876 --- [demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-31T19:19:26.303+01:00  INFO 2876 --- [demo] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 3 JPA repository interfaces.
+2024-10-31T19:19:26.425+01:00  INFO 2876 --- [demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-10-31T19:19:26.427+01:00  INFO 2876 --- [demo] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-31T19:19:26.427+01:00  INFO 2876 --- [demo] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-10-31T19:19:26.454+01:00  INFO 2876 --- [demo] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-31T19:19:26.454+01:00  INFO 2876 --- [demo] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 363 ms
+2024-10-31T19:19:26.513+01:00  INFO 2876 --- [demo] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-31T19:19:26.515+01:00  INFO 2876 --- [demo] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-31T19:19:26.524+01:00  INFO 2876 --- [demo] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-31T19:19:26.526+01:00  INFO 2876 --- [demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2024-10-31T19:19:26.543+01:00  INFO 2876 --- [demo] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70632f60
+2024-10-31T19:19:26.544+01:00  INFO 2876 --- [demo] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2024-10-31T19:19:26.617+01:00  INFO 2876 --- [demo] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-31T19:19:26.743+01:00  INFO 2876 --- [demo] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-31T19:19:26.846+01:00  WARN 2876 --- [demo] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-31T19:19:26.853+01:00  WARN 2876 --- [demo] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 0d5f4155-17c0-472a-8b41-2b9951651c64
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-10-31T19:19:26.855+01:00  INFO 2876 --- [demo] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-10-31T19:19:27.005+01:00  INFO 2876 --- [demo] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-10-31T19:19:27.017+01:00  INFO 2876 --- [demo] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-10-31T19:19:27.020+01:00  INFO 2876 --- [demo] [restartedMain] yellow.penguin.demo.DemoApplication      : Started DemoApplication in 0.96 seconds (process running for 100.172)
+2024-10-31T19:19:27.154+01:00  INFO 2876 --- [demo] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2024-10-31T19:19:28.653+01:00  INFO 2876 --- [demo] [RMI TCP Connection(5)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-10-31T19:19:28.661+01:00  INFO 2876 --- [demo] [RMI TCP Connection(5)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-31T19:19:28.662+01:00  INFO 2876 --- [demo] [RMI TCP Connection(5)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2024-10-31T19:19:28.669+01:00  INFO 2876 --- [demo] [RMI TCP Connection(5)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
