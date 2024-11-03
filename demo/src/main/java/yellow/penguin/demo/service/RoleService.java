@@ -30,6 +30,16 @@ public class RoleService {
 		}
 		return null;
 	}
+
+	public RoleEntity getRoleById(String roleId) {
+		Optional<RoleEntity> roleOp = roleRepository.findById(roleId);
+		if(roleOp.isPresent()) {
+			return roleOp.get();
+		}
+		else {
+			throw new RuntimeException("Role not found");
+		}
+	}
 	
 	
 	

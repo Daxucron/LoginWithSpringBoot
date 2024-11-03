@@ -1,9 +1,18 @@
 package yellow.penguin.demo.service;
 
+import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +20,13 @@ import yellow.penguin.demo.dto.request.CreateUserRequest;
 import yellow.penguin.demo.dto.request.LoginRequest;
 import yellow.penguin.demo.dto.response.UserResponse;
 import yellow.penguin.demo.exception.MissingUserArgumentsForCreationRuntimeException;
+import yellow.penguin.demo.model.entity.RoleEntity;
 import yellow.penguin.demo.model.entity.UserEntity;
 import yellow.penguin.demo.model.enums.Roles;
 import yellow.penguin.demo.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -53,6 +63,14 @@ public class UserService {
 		}		
 		return false;
 	}
+	
+	private UserEntity getUserById(String userId) throws UsernameNotFoundException {
+		Optional<UserEntity> userOp =userRepository.findById(userId);
+		if(userOp.isPresent()) {
+			return userOp.get();
+		}
+		throw new UsernameNotFoundException("User not found");		
+	}
 
 	private boolean validateUser(UserEntity user){
 		if(user.getPassword() != null && user.getUserName() != null && user.getEmail() != null) {
@@ -61,6 +79,19 @@ public class UserService {
 		else {
 			throw new MissingUserArgumentsForCreationRuntimeException("User not valid");
 		}
+	}
+	
+	private Set<RoleEntity> getRoles(String userId){		
+		return userRoleService.getRoles(userId);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+		UserEntity user = getUserById(userId);
+		Collection<? extends GrantedAuthority> authorities = getRoles(userId).stream()
+				.map(role-> new SimpleGrantedAuthority("ROLE_".concat(role.getRoleName())))
+				.collect(Collectors.toSet());
+		return new User(user.getId(), user.getPassword(), true, true, true, true, authorities);
 	}
 	
 }

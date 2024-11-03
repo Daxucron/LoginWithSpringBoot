@@ -1,4 +1,5 @@
 package yellow.penguin.demo.security.jwt;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -10,6 +11,11 @@ import java.util.Properties;
 
 import javax.crypto.SecretKey;
 
+import org.springframework.stereotype.Component;
+
+
+
+@Component
 public class TokenManager {
 
     private static final SecretKey SECRET_KEY =  loadSecretKey();
@@ -32,10 +38,10 @@ public class TokenManager {
     }
     
     // Method to generate the token
-    public String generateToken(String username) {
+    public String generateToken(String userId) {
         return Jwts.builder()
-                .subject(username)
-                .claim("name", username) // Add a specific claim
+                .subject(userId)
+                .claim("userid", userId) // Add a specific claim
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SECRET_KEY)
@@ -65,7 +71,7 @@ public class TokenManager {
     }
 
     // Method to get the username from the token
-    public String getUsername(String token) {
+    public String getSubject(String token) {
         return getClaims(token).getSubject();
     }
 }
