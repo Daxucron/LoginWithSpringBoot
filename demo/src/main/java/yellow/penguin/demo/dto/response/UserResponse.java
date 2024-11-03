@@ -10,10 +10,12 @@ import yellow.penguin.demo.model.entity.UserEntity;
 @AllArgsConstructor
 public class UserResponse {
 	
+	private String id;
 	private String userName;
 	private String email;
 
-	public UserResponse(UserEntity createdUser) {		
+	public UserResponse(UserEntity createdUser) {
+		this.id = createdUser.getId();
 		this.userName = createdUser.getUserName();
 		this.email = createdUser.getEmail();		
 	}

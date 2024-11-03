@@ -51,17 +51,21 @@ public class UserService implements UserDetailsService{
 		return null;		
 	}
 	
-	public boolean loginUser(LoginRequest request) {
-		
+	public UserResponse loginUser(LoginRequest request) throws Exception {		
 		UserEntity userToFind = new UserEntity();
 		userToFind.setUserName(request.getUserName());
 		Optional<UserEntity> userOp = userRepository.findOne(Example.of(userToFind));
 		if(userOp.isPresent()) {
 			if(passwordEncoder.matches(request.getPassword(), userOp.get().getPassword())) {
-				return true;
+				return new UserResponse(userOp.get());
 			}
 		}		
-		return false;
+		throw new Exception("Wrong Password");
+	}
+	
+	public UserResponse getUserByName(String userName) {
+		UserEntity userEntity = userRepository.findByUserName(userName);
+		return new UserResponse(userEntity);
 	}
 	
 	private UserEntity getUserById(String userId) throws UsernameNotFoundException {

@@ -33,8 +33,6 @@ public class DataBaseLoader {
 		userA.setUserName("YellowPenguin");
 		userA.setPassword("potatoe");
 		userService.createUser(userA);
-
-		System.out.println("Creado UserA");
 		};
 
 	}
