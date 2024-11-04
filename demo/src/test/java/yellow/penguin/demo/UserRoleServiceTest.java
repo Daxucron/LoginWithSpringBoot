@@ -23,7 +23,7 @@ public class UserRoleServiceTest {
 	
 	@Test
 	public void getRolesTest() {
-		UserResponse userResponse = userService.getUserByName("YellowPenguin");
+		UserResponse userResponse = userService.getUserByUserName("YellowPenguin");
 		Set<RoleEntity> roles = userRoleService.getRoles(userResponse.getId());
 		
 		for(RoleEntity role: roles) {

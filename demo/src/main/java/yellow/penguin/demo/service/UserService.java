@@ -20,6 +20,7 @@ import yellow.penguin.demo.dto.request.CreateUserRequest;
 import yellow.penguin.demo.dto.request.LoginRequest;
 import yellow.penguin.demo.dto.response.UserResponse;
 import yellow.penguin.demo.exception.MissingUserArgumentsForCreationRuntimeException;
+import yellow.penguin.demo.exception.UserAlreadyExistsException;
 import yellow.penguin.demo.model.entity.RoleEntity;
 import yellow.penguin.demo.model.entity.UserEntity;
 import yellow.penguin.demo.model.enums.Roles;
@@ -40,18 +41,32 @@ public class UserService implements UserDetailsService{
 	@Autowired
 	private UserRepository userRepository;
 	
-	public UserResponse createUser(CreateUserRequest userRequest){
+	public UserResponse createUser(CreateUserRequest userRequest) throws Exception{
 		UserEntity user = new UserEntity(userRequest);
 		user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		if(validateUser(user)) {
-			
+			if(userExists(user)) {
+				throw new UserAlreadyExistsException("Username or email duplicated");
+			}
 			UserEntity createdUser = userRepository.save(user);
 			userRoleService.createRelation(createdUser, roleService.getRoleByName(Roles.USER));
-			return new UserResponse(createdUser);
+			return new UserResponse(createdUser);				
 		}
 		return null;		
 	}
 	
+	private boolean userExists(UserEntity user) {
+		Optional<UserEntity> userOp  = userRepository.findByUserName(user.getUserName());
+		if(userOp.isPresent()) {
+			return true;
+		}
+		userOp = userRepository.findByEmail(user.getEmail());
+		if(userOp.isPresent()) {
+			return true;
+		}
+		return false;
+	}
+
 	public UserResponse loginUser(LoginRequest request) throws Exception {		
 		UserEntity userToFind = new UserEntity();
 		userToFind.setUserName(request.getUserName());
@@ -64,9 +79,13 @@ public class UserService implements UserDetailsService{
 		throw new Exception("Wrong Password");
 	}
 	
-	public UserResponse getUserByName(String userName) {
-		UserEntity userEntity = userRepository.findByUserName(userName);
-		return new UserResponse(userEntity);
+	public UserResponse getUserByUserName(String userName) {
+		Optional<UserEntity> userOp = userRepository.findByUserName(userName);
+		if(userOp.isPresent()) {
+			UserEntity userEntity = userOp.get();
+			return new UserResponse(userEntity);
+		}
+		throw new UsernameNotFoundException("User not found with username = " + userName);		
 	}
 	
 	private UserEntity getUserById(String userId) throws UsernameNotFoundException {

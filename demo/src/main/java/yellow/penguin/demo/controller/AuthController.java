@@ -4,16 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import yellow.penguin.demo.dto.request.CreateUserRequest;
 import yellow.penguin.demo.dto.request.LoginRequest;
 import yellow.penguin.demo.dto.response.UserResponse;
+import yellow.penguin.demo.dto.response.UserResponseError;
 import yellow.penguin.demo.service.AuthService;
 import yellow.penguin.demo.service.UserService;
 
@@ -29,11 +28,13 @@ public class AuthController {
 	//TODO: Cambiar el register por la interfaz del authService y eliminar el userService de este controller
     @PostMapping("/register")
     public ResponseEntity<UserResponse> registerUser(@RequestBody CreateUserRequest userRequest) {
+    	UserResponse userResponse;
         try {
-            UserResponse userResponse = userService.createUser(userRequest);
+        	userResponse = userService.createUser(userRequest);
             return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        	userResponse = new UserResponseError(e.getMessage());
+            return new ResponseEntity<>(userResponse, HttpStatus.BAD_REQUEST);
         }
     }
     
