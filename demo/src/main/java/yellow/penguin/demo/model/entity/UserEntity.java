@@ -27,9 +27,10 @@
 		@Column(name = "user_id")
 		@GeneratedValue(strategy = GenerationType.UUID)
 		private String id;
-		@Column(name = "username")
+		@Column(name = "username", unique=true)
 		private String userName;
 		private String password;
+		@Column(unique=true)
 		private String email;
 	
 	}

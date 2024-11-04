@@ -39,7 +39,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 						null, userDetails.getAuthorities());
 				SecurityContextHolder.getContext().setAuthentication(authToken);
 			} else {
-				// Si el token es inválido, puede establecer una respuesta de error
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token inválido");
 				return;
 			}

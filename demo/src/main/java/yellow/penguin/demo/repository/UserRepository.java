@@ -8,4 +8,5 @@ import yellow.penguin.demo.model.entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, String>{
 
 	UserEntity findByUserName(String userName);
+	UserEntity findByEmail(String email);
 }

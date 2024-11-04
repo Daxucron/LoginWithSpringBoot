@@ -44,6 +44,7 @@ public class UserService implements UserDetailsService{
 		UserEntity user = new UserEntity(userRequest);
 		user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		if(validateUser(user)) {
+			
 			UserEntity createdUser = userRepository.save(user);
 			userRoleService.createRelation(createdUser, roleService.getRoleByName(Roles.USER));
 			return new UserResponse(createdUser);
