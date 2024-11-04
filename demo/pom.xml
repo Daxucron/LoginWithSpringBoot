@@ -94,6 +94,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>yellow.penguin</groupId>
+			<artifactId>dressup</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

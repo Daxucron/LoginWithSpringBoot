@@ -13,8 +13,6 @@ import javax.crypto.SecretKey;
 
 import org.springframework.stereotype.Component;
 
-
-
 @Component
 public class TokenManager {
 
@@ -41,7 +39,7 @@ public class TokenManager {
     public String generateToken(String userId) {
         return Jwts.builder()
                 .subject(userId)
-                .claim("userid", userId) // Add a specific claim
+                // .claim("userid", userId) // Add a specific claim
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SECRET_KEY)
